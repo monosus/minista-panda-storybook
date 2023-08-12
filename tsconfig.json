@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noErrorTruncation": true,
+    "jsx": "react-jsx",
+    "types": ["minista/client"],
+     "paths": {
+      "~/*": ["./src/*"],
+      "@styled-system/*": ["./styled-system/*"]
+    }
+  },
+  "include": ["./minista.config.ts", "src", "stories","lib","./styled-system/"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
+}
