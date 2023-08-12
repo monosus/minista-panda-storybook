@@ -46,12 +46,12 @@ function generateRecipeExports(): void {
   fs.writeFileSync(recipeIndexFilePath, output + '\n');
 }
 
-function init() {
+function init(): void {
   generateComponentExports();
   generateRecipeExports();
 }
 
-function watchComponents() {
+function watchComponents(): void {
   const watcher = chokidar.watch(componentsDirectory, {
     persistent: true,
     ignoreInitial: false,
