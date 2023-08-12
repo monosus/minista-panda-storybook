@@ -1,8 +1,6 @@
-// MetaComponent.tsx
-
 import React from 'react';
-import { Head } from 'minista';  // `react-helmet` パッケージを利用
-import { meta, type MetaData } from '~/site-data/meta'; // 上で定義した型とオブジェクトをインポート
+import { Head } from 'minista';  
+import { meta, type MetaData } from '~/site-data/meta'; 
 
 interface MetaComponentProps {
   path: string;
@@ -11,7 +9,7 @@ interface MetaComponentProps {
 const MetaComponent: React.FC<MetaComponentProps> = ({ path }) => {
   const currentMeta: MetaData = meta[path];
 
-  if (!currentMeta) return null;
+  if (typeof currentMeta === 'undefined' || currentMeta === null) return null;
 
   return (
     <Head>
