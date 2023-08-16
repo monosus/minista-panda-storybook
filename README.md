@@ -2,7 +2,6 @@
 
 いい感じに開発してコンパクトに納品する.
 
-
 ## npm scripts
 
 `npm install` : インストール

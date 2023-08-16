@@ -1,6 +1,6 @@
 import React from 'react';
-import { Head } from 'minista';  
-import { meta, type MetaData } from '~/site-data/meta'; 
+import { Head } from 'minista';
+import { meta, type MetaData } from '~/site-data/meta';
 
 interface MetaComponentProps {
   path: string;

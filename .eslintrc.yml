@@ -1,19 +1,28 @@
 env:
   browser: true
   es2021: true
+parser: '@typescript-eslint/parser'
+settings:
+  react:
+    version: detect
 extends:
+  - 'eslint:recommended'
+  - 'plugin:@typescript-eslint/eslint-recommended'
+  - 'plugin:@typescript-eslint/recommended'
   - standard-with-typescript
   - plugin:react/recommended
   - plugin:jsx-a11y/recommended
   - prettier
 parserOptions:
   ecmaVersion: latest
-  project: ./tsconfig.json
+  project: './tsconfig.json'
   sourceType: module
+  tsconfigRootDir: '.'
 plugins:
   - react
+  - '@typescript-eslint'
   - jsx-a11y
-rules: 
+rules:
   quotes: 0
 overrides:
   - files:

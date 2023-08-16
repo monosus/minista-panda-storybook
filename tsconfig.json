@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
+    "strict": true,
     "target": "esnext",
     "module": "esnext",
     "allowSyntheticDefaultImports": true,
@@ -11,12 +12,12 @@
     "noErrorTruncation": true,
     "jsx": "react-jsx",
     "types": ["minista/client"],
-     "paths": {
+    "paths": {
       "~/*": ["./src/*"],
       "@styled-system/*": ["./styled-system/*"]
     }
   },
-  "include": ["./minista.config.ts", "src", "stories","lib","./styled-system/"],
+  "include": ["./minista.config.ts", "./src/**/*", "stories", "lib", "./styled-system/", "./panda.config.ts"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"

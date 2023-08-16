@@ -1,9 +1,9 @@
-import React from 'react'
-import type { GlobalProps } from 'minista'
-import { Head } from 'minista'
-import { Meta } from '~/components'
+import React from 'react';
+import type { GlobalProps } from 'minista';
+import { Head } from 'minista';
+import { Meta } from '~/components';
 
-export default function Global({ children,title,page,url }: GlobalProps) {
+export default function Global({ children, title, page, url }: GlobalProps) {
   return (
     <>
       <Meta path={url} />
@@ -13,5 +13,5 @@ export default function Global({ children,title,page,url }: GlobalProps) {
       {page}
       {children}
     </>
-  )
+  );
 }

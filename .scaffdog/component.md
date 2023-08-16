@@ -2,11 +2,10 @@
 name: 'component'
 root: '.'
 output: 'src/components'
-ignore:	['.']
+ignore: ['.']
 questions:
   name: 'Please enter a componentName.'
 ---
-
 
 # {{ inputs.name | pascal }}/index.tsx
 
