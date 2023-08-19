@@ -17,7 +17,6 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   shouldAppendHtml?: boolean;
   baseDir?: string;
 }
-
 /**
  * 条件に基づき、hrefに.htmlを追加するリンクコンポーネント。
  * baseDirプロパティに入力がない場合はminista.configのbaseを付与する。
