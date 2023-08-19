@@ -14,4 +14,11 @@ export default defineConfig({
   root: '',
   base: `/${DEV_SITE_DIR}`,
   out: `dist/${DEV_SITE_DIR}`,
+  assets: {
+    images: {
+      optimize: {
+        breakpoints: [640],
+      },
+    },
+  },
 });
