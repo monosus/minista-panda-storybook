@@ -13,7 +13,7 @@
     "generate:components-export-list": "ts-node lib/component-list.ts init",
     "watch:components-export-list": "ts-node lib/component-list.ts watch",
     "generate-component": "npx scaffdog generate",
-    "lint": "tsc --noEmit -p tsconfig.json && npx eslint . && npx prettier -w ."
+    "lint": "tsc --noEmit -p tsconfig.json && npx eslint . && npx markuplint --config .markuplintrc.yml src/**/*.tsx && npx prettier -w ."
   },
   "devDependencies": {
     "@markuplint/jsx-parser": "^3.9.0",

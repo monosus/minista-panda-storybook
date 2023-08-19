@@ -4,6 +4,9 @@ parser:
   "\\.tsx$": '@markuplint/jsx-parser'
 specs:
   "\\.tsx$": '@markuplint/react-spec'
+pretenders:
+  - selector: 'HtmlAppendedLink'
+    as: 'a'
 rules:
   invalid-attr:
     options:
