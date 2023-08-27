@@ -6,7 +6,6 @@ import { Button, heading as Heading } from '~/components';
 import HtmlAppendedLink from '~/components/util/HtmlAppendedLink';
 import InsertHtml from '~/components/util/InsertHtml';
 
-
 export const metadata: Metadata = {
   title: 'Home',
   page: 'hoge',
@@ -20,8 +19,7 @@ const index = () => {
       <p>
         <strong>hogehoge has</strong>
       </p>
-      <InsertHtml filePath="/include/hoge" hxTrigger={{ event: "revealed",delay:'4s' }} partName='recms-hoge-parts'/>
-
+      <InsertHtml filePath="/include/hoge" hxTrigger={{ event: 'revealed', delay: '4s' }} partName="recms-hoge-parts" />
 
       <nav hx-boost="true">
         <HtmlAppendedLink href="/about" className="hoge">

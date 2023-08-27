@@ -32,10 +32,9 @@ const HtmlAppendedLink: React.FC<LinkProps> = ({
   ...props
 }: LinkProps): React.ReactElement => {
   const processedHref = processHref({
-    href:`${baseDir}${href}`,
+    href: `${baseDir}${href}`,
     shouldAppendHtml,
-  })
-  
+  });
 
   // 本番環境で、かつhrefが / で終わっていない場合、.htmlを追加
   // processHref(processedHref)

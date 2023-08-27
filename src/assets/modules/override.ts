@@ -1,6 +1,7 @@
-window.addEventListener('htmx:beforeSend', function(evt) {
-    const charsetChangeTarget = evt.detail.pathInfo.requestPath
-    // if (charsetChangeTarget.endsWith('.html')) {
-    evt.detail.xhr.overrideMimeType('text/html;charset=Shift_JIS');
-    // }
+window.addEventListener('htmx:beforeSend', function (evt) {
+  const detail = (evt as CustomEvent).detail;
+  // const charsetChangeTarget = detail.pathInfo.requestPath
+  // if (charsetChangeTarget.endsWith('.html')) {
+  detail.xhr.overrideMimeType('text/html;charset=Shift_JIS');
+  // }
 });

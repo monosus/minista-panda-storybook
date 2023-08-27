@@ -1,7 +1,7 @@
 @layer reset, base, tokens, recipes, utilities;
 
 p:has(strong) {
-  color:tomato;
+  color: tomato;
   font-weight: bold;
-  font-size:4rem;
+  font-size: 4rem;
 }

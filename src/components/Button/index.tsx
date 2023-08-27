@@ -1,4 +1,4 @@
-import React,{useId} from 'react';
+import React, { useId } from 'react';
 import { Button as ButtonRecipe, type ButtonVariant } from '@styled-system/recipes';
 
 type ButtonProps = ButtonVariant & {
