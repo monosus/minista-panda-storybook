@@ -1,3 +1,3 @@
 module.exports = {
-  plugins: [require('@pandacss/dev/postcss')(),require('css-has-pseudo')()],
+  plugins: [require('@pandacss/dev/postcss')(), require('css-has-pseudo')()],
 };
