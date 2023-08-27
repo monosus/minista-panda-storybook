@@ -1,6 +1,6 @@
 import React from 'react';
 import buildConfig from '../../../minista.config';
-
+import processHref from './processHref';
 const { base } = buildConfig;
 /**
  * HtmlAppendedLinkのためのProps。
@@ -31,12 +31,17 @@ const HtmlAppendedLink: React.FC<LinkProps> = ({
   baseDir = base ?? '',
   ...props
 }: LinkProps): React.ReactElement => {
-  let processedHref = `${baseDir}${href}`;
+  const processedHref = processHref({
+    href:`${baseDir}${href}`,
+    shouldAppendHtml,
+  })
+  
 
   // 本番環境で、かつhrefが / で終わっていない場合、.htmlを追加
-  if (import.meta.env.PROD && shouldAppendHtml && !href.endsWith('/')) {
-    processedHref += '.html';
-  }
+  // processHref(processedHref)
+  // if (import.meta.env.PROD && shouldAppendHtml && !href.endsWith('/')) {
+  //   processedHref += '.html';
+  // }
 
   return (
     <a href={processedHref} {...props}>
