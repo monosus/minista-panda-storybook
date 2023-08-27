@@ -1,8 +1,8 @@
-type ProcessHrefOptions = {
+interface ProcessHrefOptions {
     href: string;
     shouldAppendHtml: boolean;
     isProd?: boolean;
-  };
+  }
   
   function processHref(options: ProcessHrefOptions): string {
     const { href, shouldAppendHtml, isProd = import.meta.env.PROD } = options;
