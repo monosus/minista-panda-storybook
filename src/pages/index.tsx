@@ -4,6 +4,8 @@ import { Head } from 'minista';
 import * as Components from '~/components';
 import { Button, heading as Heading } from '~/components';
 import HtmlAppendedLink from '~/components/util/HtmlAppendedLink';
+import InsertHtml from '~/components/util/InsertHtml';
+
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -15,6 +17,12 @@ const index = () => {
       <Head>
         <script type="module" src="/src/assets/entry.ts" />
       </Head>
+      <p>
+        <strong>hogehoge has</strong>
+      </p>
+      <InsertHtml filePath="/include/hoge" hxTrigger={{ event: "revealed",delay:'4s' }} partName='recms-hoge-parts'/>
+
+
       <nav hx-boost="true">
         <HtmlAppendedLink href="/about" className="hoge">
           about.html?
@@ -29,6 +37,10 @@ const index = () => {
       </HtmlAppendedLink>
       <div>Enter</div>
       <Button size="sm" visual="solid">
+        button
+      </Button>
+      <span>oooo</span>
+      <Button size="sm" visual="outline">
         button
       </Button>
       <Button size="sm" visual="outline">

@@ -8,7 +8,8 @@ export default function Global({ children, title, page, url }: GlobalProps) {
     <>
       <Meta path={url} />
       <Head>
-        <script defer src="https://unpkg.com/htmx.org@1.9.4"></script>
+        <meta charSet="shift_jis" />
+        {/* <script defer src="https://unpkg.com/htmx.org@1.9.4"></script> */}
         <link rel="stylesheet" href="/src/assets/index.css" />
       </Head>
       {page}
