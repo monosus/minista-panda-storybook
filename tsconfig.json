@@ -4,6 +4,7 @@
     "strict": true,
     "target": "esnext",
     "module": "esnext",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": true,
     "moduleResolution": "node",
@@ -17,7 +18,7 @@
       "@styled-system/*": ["./styled-system/*"]
     }
   },
-  "include": ["./minista.config.ts", "./src/**/*", "stories", "lib", "./styled-system/", "./panda.config.ts"],
+  "include": ["minista.config.ts", "./src/**/*", "lib","stories", "styled-system", "panda.config.ts"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"
