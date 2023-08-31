@@ -16,17 +16,17 @@ pre-commit:
   parallel: true
   commands:
     eslint:
-      glob: "*.{js,ts,jsx,tsx}"
+      glob: '*.{js,ts,jsx,tsx}'
       run: npx eslint {staged_files}
     type-check:
-      glob: "*.{ts,tsx}"
+      glob: '*.{ts,tsx}'
       run: tsc --noEmit -p tsconfig.json
     markup:
-      glob: "*.{tsx}"
-      run: npx markuplint --config .markuplintrc.yml {staged_files} 
+      glob: '*.{tsx}'
+      run: npx markuplint --config .markuplintrc.yml {staged_files}
     prettier:
-      glob: "*.{tsx,ts,js,jsx,css,html,json,md,yml}"
-      run: npx prettier -w  {staged_files} 
+      glob: '*.{tsx,ts,js,jsx,css,html,json,md,yml}'
+      run: npx prettier -w  {staged_files}
 #     rubocop:
 #       tags: backend style
 #       glob: "*.rb"
