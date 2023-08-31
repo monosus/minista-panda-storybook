@@ -17,13 +17,13 @@ pre-commit:
   commands:
     eslint:
       glob: '*.{js,ts,jsx,tsx}'
-      run: npx eslint {staged_files}
+      run: npx eslint --fix {staged_files}
     type-check:
       glob: '*.{ts,tsx}'
       run: tsc --noEmit -p tsconfig.json
     markup:
       glob: '*.{tsx}'
-      run: npx markuplint --config .markuplintrc.yml {staged_files}
+      run: npx markuplint --config .markuplintrc.yml --fix {staged_files}
     prettier:
       glob: '*.{tsx,ts,js,jsx,css,html,json,md,yml}'
       run: npx prettier -w  {staged_files}
