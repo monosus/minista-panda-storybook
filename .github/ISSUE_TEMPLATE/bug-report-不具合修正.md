@@ -1,5 +1,5 @@
 ---
-name: Bug report ふぐイア修正
+name: Bug report 不具合修正
 about: Create a report to help us improve
 title: ''
 labels: ''
