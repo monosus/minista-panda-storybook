@@ -9,13 +9,8 @@ jobs:
   create_draft_pr:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      
-    # Fetch all branches from origin
-    - name: Fetch all branches
-      run: git fetch --all
-
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Fetch all branches
         run: git fetch --all
