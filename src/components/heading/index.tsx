@@ -44,7 +44,7 @@ const Heading = ({ children, as = 'h2' }: Props): JSX.Element => {
           })}
         >
           {children}
-        		</Tag>
+        </Tag>
       </div>
     </>
   );
