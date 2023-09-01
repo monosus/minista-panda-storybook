@@ -19,6 +19,8 @@ pre-commit:
       tags: frontend style
       glob: '*.{js,jsx,ts,tsx,md,yaml,yml,json,css,scss,less,html,htm}'
       run: npm run lint
+      stage_fixed: true
+
     # eslint:
     #   glob: '*.{js,ts,jsx,tsx}'
     #   run: npx eslint --fix {staged_files}
