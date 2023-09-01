@@ -12,13 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Fetch all branches from origin
       - name: Fetch all branches
         run: git fetch --all
 
-      # Get Issue title
       - name: Get Issue title
-        id: issue_title
         run: |
           issue_number=${GITHUB_REF#refs/heads/issue-}
           issue_title=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -26,22 +23,14 @@ jobs:
             "https://api.github.com/repos/${{ github.repository }}/issues/${issue_number}" | jq -r '.title')
           echo "ISSUE_TITLE=${issue_title}" >> $GITHUB_ENV
 
-      # Check if a PR already exists for this issue branch
       - name: Check existing PR
-        id: check_pr
         run: |
           pr_exists=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             "https://api.github.com/repos/${{ github.repository }}/pulls?head=${{ github.repository_owner }}:${{ github.ref }}" | jq '. | length')
           echo "PR_EXISTS=${pr_exists}" >> $GITHUB_ENV
 
-      # Create Draft PR if none exists
       - name: Create Draft PR
         if: env.PR_EXISTS == '0'
-        uses: repo-sync/pull-request@v2
-        with:
-          source_branch: ${{ github.ref }}
-          destination_branch: 'main'
-          title: '${{ env.ISSUE_TITLE }}'
-          is_draft: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create --base main --head ${{ github.ref }} --title "${{ env.ISSUE_TITLE }}" --draft
