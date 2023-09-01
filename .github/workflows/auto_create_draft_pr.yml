@@ -11,14 +11,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    # Fetch the main branch
-    - name: Fetch origin/main
-      run: git fetch origin main:main
+      
+    # Fetch all branches from origin
+    - name: Fetch all branches
+      run: git fetch --all
 
     - name: Check if this is the first commit
       run: |
-        COUNT=$(git rev-list --count HEAD ^main)
+        COUNT=$(git rev-list --count HEAD ^origin/main)
         if [ "$COUNT" -eq "1" ]; then
           echo "FIRST_COMMIT=true" >> $GITHUB_ENV
         else
