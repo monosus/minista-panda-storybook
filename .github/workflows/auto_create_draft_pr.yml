@@ -23,7 +23,7 @@ jobs:
           echo "FIRST_COMMIT=true" >> $GITHUB_ENV
         else
           echo "FIRST_COMMIT=false" >> $GITHUB_ENV
-
+          
     - name: Create Draft PR
       if: env.FIRST_COMMIT == 'true'
       uses: repo-sync/pull-request@v2
