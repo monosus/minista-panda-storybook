@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from '@styled-system/css';
 import HtmlAppendedLink from '~/components/util/HtmlAppendedLink';
 import { Head, Image } from 'minista';
+import { hstack } from '@styled-system/patterns';
 export default function About() {
   return (
     <>
@@ -17,16 +18,27 @@ export default function About() {
           home?
         </HtmlAppendedLink>
       </nav>
-
+      <StackImage />
       <HtmlAppendedLink href="/">no boost home?</HtmlAppendedLink>
-      <figure className={css({ w: '1/3' })}>
-        <Image
-          src="/src/assets/images/jainam-sheth-SawbRerFzXs-unsplash.jpg"
-          format="webp"
-          quality={65}
-          loading="eager"
-        ></Image>
-      </figure>
     </>
   );
 }
+
+const StackImage = () => {
+  return (
+    <figure className={hstack({ w: '1/3', gap: '10' })}>
+      <Image
+        src="/src/assets/images/jainam-sheth-SawbRerFzXs-unsplash.jpg"
+        format="webp"
+        quality={65}
+        loading="eager"
+      ></Image>
+      <Image
+        src="/src/assets/images/jainam-sheth-SawbRerFzXs-unsplash.jpg"
+        format="webp"
+        quality={65}
+        loading="eager"
+      ></Image>
+    </figure>
+  );
+};
