@@ -10,7 +10,7 @@ export default function About() {
         <script type="module" src="/src/assets/entry.ts" />
       </Head>
       <div className={css({ border: '4px dotted orange', width: '5/12' })}>
-        <HtmlAppendedLink href="hoge">abbbbbbb</HtmlAppendedLink>
+        <HtmlAppendedLink href="hoge">abbbbbb</HtmlAppendedLink>
       </div>
       <nav>
         <HtmlAppendedLink href="/" baseDir="">
