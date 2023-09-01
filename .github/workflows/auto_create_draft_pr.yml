@@ -30,12 +30,21 @@ jobs:
             "https://api.github.com/repos/${{ github.repository }}/pulls?head=${{ github.repository_owner }}:${{ github.ref }}" | jq '. | length')
           echo "PR_EXISTS=${pr_exists}" >> $GITHUB_ENV
 
+      - name: Prepare PR body
+        run: |
+          echo "# 対応ISSUE" > pr_body.md
+          echo "" >> pr_body.md
+          echo "[#${{ env.ISSUE_NUMBER }}](https://github.com/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }})" >> pr_body.md
+          echo "" >> pr_body.md
+          echo "# 画面URL" >> pr_body.md
+          echo "# ...(以下略)..."
+
       - name: Create Draft PR
         if: env.PR_EXISTS == '0'
         run: |
           gh pr create --base main --head ${{ github.ref }} \
           --title "${{ env.ISSUE_TITLE }}" \
-          --body $'# 対応ISSUE\n\n[${{ env.ISSUE_NUMBER }}](https://github.com/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }})\n\n# 画面URL\n\npagesであればdev,コンポーネントのみの場合はstorybookのurl\n\n- [URL]\n\n# やった事\n\n- このプルリクエストにて何をしたのか？\n\n# 動作確認\n\n- どの環境でどんな動作チェックをしたか\n- 動作確認をした事についてスクショなどがあるとわかりやすくて良い\n\n# Refs (レビューにあたって参考にすべき情報）(Optional)\n\n- 関連するプルリクエストやイシュー、コンフルリンクなど、レビュワーがレビューするにあたっての補足情報' \
+          --body-file pr_body.md \
           --draft
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
