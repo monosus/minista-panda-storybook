@@ -2,6 +2,13 @@
 
 いい感じに開発してコンパクトに納品する.
 
+## pre-commit
+コード規約を守るため
+npm install後に以下を実施して下さい。
+`npx lefthook add pre-commit`
+
+commit時に自動でtype check eslint markup-lint prettierで整形とチェックをします。
+
 ## npm scripts
 
 `npm install` : インストール
