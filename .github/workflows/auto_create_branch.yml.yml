@@ -1,0 +1,19 @@
+name: Auto Create Branch when Issue is Assigned
+
+on:
+  issues:
+    types: [assigned]
+
+jobs:
+  create_branch:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create new branch
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email ${{ secrets.TEST_EMAIL }}
+        git checkout -b issue-${{ github.event.issue.number }}
+        git push origin issue-${{ github.event.issue.number }}
