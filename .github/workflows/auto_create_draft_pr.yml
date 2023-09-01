@@ -9,22 +9,22 @@ jobs:
   create_draft_pr:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Check if this is the first commit
-      run: |
-        COUNT=$(git rev-list --count HEAD ^origin/main)
-        if [ "$COUNT" -eq "1" ]; then
-          echo "FIRST_COMMIT=true" >> $GITHUB_ENV
-        else
-          echo "FIRST_COMMIT=false" >> $GITHUB_ENV
-    - name: Create Draft PR
-      if: env.FIRST_COMMIT == 'true'
-      uses: repo-sync/pull-request@v2
-      with:
-        source_branch: ${{ github.ref }}
-        destination_branch: "main"
-        title: "Draft PR for ${{ github.ref }}"
-        is_draft: true
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if this is the first commit
+        run: |
+          COUNT=$(git rev-list --count HEAD ^origin/main)
+          if [ "$COUNT" -eq "1" ]; then
+            echo "FIRST_COMMIT=true" >> $GITHUB_ENV
+          else
+            echo "FIRST_COMMIT=false" >> $GITHUB_ENV
+      - name: Create Draft PR
+        if: env.FIRST_COMMIT == 'true'
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ github.ref }}
+          destination_branch: 'main'
+          title: 'Draft PR for ${{ github.ref }}'
+          is_draft: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
