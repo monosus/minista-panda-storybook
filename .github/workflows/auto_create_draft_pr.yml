@@ -34,3 +34,5 @@ jobs:
         if: env.PR_EXISTS == '0'
         run: |
           gh pr create --base main --head ${{ github.ref }} --title "${{ env.ISSUE_TITLE }}" --draft
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
