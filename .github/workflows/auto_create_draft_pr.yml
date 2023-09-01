@@ -34,10 +34,10 @@ jobs:
         run: |
           echo "# 対応ISSUE" > pr_body.md
           echo "" >> pr_body.md
-          echo "[#${{ env.ISSUE_NUMBER }}](https://github.com/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }})" >> pr_body.md
+          echo "[\#${{ env.ISSUE_NUMBER }}](https://github.com/${{ github.repository }}/issues/${{ env.ISSUE_NUMBER }})" >> pr_body.md
           echo "" >> pr_body.md
           echo "# 画面URL" >> pr_body.md
-          echo "# ...(以下略)..."
+          echo "# ...(以下略)..." >> pr_body.md
 
       - name: Create Draft PR
         if: env.PR_EXISTS == '0'
