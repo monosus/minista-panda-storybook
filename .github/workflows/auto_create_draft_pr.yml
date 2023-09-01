@@ -1,4 +1,4 @@
-name: Auto Create Draft PR when First Commit to Issue Branch
+name: Auto Create Draft PR when No Existing PR for Issue Branch
 
 on:
   push:
@@ -16,16 +16,18 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
-      - name: Check if this is the first commit
+      # Check if a PR already exists for this issue branch
+      - name: Check existing PR
+        id: check_pr
         run: |
-          COUNT=$(git rev-list --count HEAD ^origin/main)
-          if [ "$COUNT" -eq "1" ]; then
-            echo "FIRST_COMMIT=true" >> $GITHUB_ENV
-          else
-            echo "FIRST_COMMIT=false" >> $GITHUB_ENV
+          pr_exists=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls?head=${{ github.repository_owner }}:${{ github.ref }}" | jq '. | length')
+          echo "PR_EXISTS=${pr_exists}" >> $GITHUB_ENV
 
+      # Create Draft PR if none exists
       - name: Create Draft PR
-        if: env.FIRST_COMMIT == 'true'
+        if: env.PR_EXISTS == '0'
         uses: repo-sync/pull-request@v2
         with:
           source_branch: ${{ github.ref }}
