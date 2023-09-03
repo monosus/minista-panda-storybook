@@ -20,6 +20,8 @@ export default function About() {
       </nav>
       <StackImage />
       <HtmlAppendedLink href="/">no boost home?</HtmlAppendedLink>
+      <script>console.log(page)</script>
+      <script type="module" src="/src/assets/about.ts" />
     </>
   );
 }
