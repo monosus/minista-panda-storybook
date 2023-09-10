@@ -75,3 +75,8 @@ commit時に自動でtype check eslint markup-lint prettierで整形とチェッ
 
 - hrefが / で終わっていない場合、本番環境で.htmlを追加する。
 - リンクコンポーネントやボタンコンポ―を作成する際にaタグのかわりに使用する（予定)
+
+## issue - branch - PR
+
+- issueのassigneeを更新するとissue-｛issueNumber}で作業ブランチが作成される
+- 作業ブランチでリモートにcommit(push)するとdraftでPRが作成される
