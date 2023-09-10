@@ -10,4 +10,9 @@ export const meta: Record<string, MetaData> = {
     title: 'hoge | hoge',
     keywords: 'keywords',
   },
+  '/about': {
+    description: 'about page',
+    title: 'about | hoge',
+    keywords: 'keywords',
+  },
 };
