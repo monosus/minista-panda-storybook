@@ -65,8 +65,9 @@ jobs:
               base: 'main',
               draft: true
             });
-            const pr_number = pr
-            return pr_number;
+            const pr_number = ${{pr}}
+            echo ${pr}
+            # return pr_number;
 
       # issueにブランチ名とプルリクエストのチェックアウトコマンドをコメントとして追加
       - name: Comment on issue with branch name and PR checkout command
