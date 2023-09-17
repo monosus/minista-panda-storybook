@@ -13,7 +13,7 @@ jobs:
     steps:
       # リポジトリのコードをチェックアウト
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # issueのタイトルからプレフィックスを抽出
       - name: Extract prefix from issue title
@@ -23,7 +23,7 @@ jobs:
           echo "PREFIX=$PREFIX" >> $GITHUB_ENV
       # test
       - name: Simple Comment on Issue
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
@@ -49,7 +49,7 @@ jobs:
       # ドラフトのプルリクエストを作成
       - name: Create draft pull request
         id: create_pr
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
@@ -69,7 +69,7 @@ jobs:
 
       # issueにブランチ名とプルリクエストのチェックアウトコマンドをコメントとして追加
       - name: Comment on issue with branch name and PR checkout command
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
