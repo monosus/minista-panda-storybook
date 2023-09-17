@@ -81,7 +81,7 @@ jobs:
             Checkout with GitHub CLI:
             \`gh pr checkout ${pr_number}\`
             `;
-            github.issues.createComment({
+            github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issue_number,
