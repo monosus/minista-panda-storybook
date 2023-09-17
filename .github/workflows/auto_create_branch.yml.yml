@@ -71,6 +71,7 @@ jobs:
               base: 'main',
               draft: true
             });
+            core.setOutput('pr_number', prResponse.data.number.toString());
 
       # issueにブランチ名とプルリクエストのチェックアウトコマンドをコメントとして追加
       - name: Comment on issue with branch name and PR checkout command
@@ -81,7 +82,7 @@ jobs:
             console.log(${{ steps.create_pr }})
             const issue_number = ${{ github.event.issue.number }};
             const branch_name = process.env.BRANCH_NAME;
-            const pr_number = ${{ steps.create_pr.outputs.result }};
+            const pr_number = ${{ steps.create_pr.outputs.pr_number }};
             const message = `
             新しいブランチ \`${branch_name}\` が作成されました。
             Checkout with GitHub CLI:
