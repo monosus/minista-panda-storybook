@@ -21,6 +21,20 @@ jobs:
         run: |
           PREFIX=$(echo "${{ github.event.issue.title }}" | grep -oE '^\[.*?\]' | tr -d '[]')
           echo "PREFIX=$PREFIX" >> $GITHUB_ENV
+      # test
+      - name: Simple Comment on Issue
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue_number = ${{ github.event.issue.number }};
+            const message = "テストコメント";
+            github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: message
+            });
 
       # 新しいブランチを作成
       - name: Create new branch
