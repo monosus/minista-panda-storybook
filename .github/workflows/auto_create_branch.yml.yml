@@ -1,19 +1,75 @@
-name: Auto Create Branch when Issue is Assigned
+# このワークフローは、issueが割り当てられたときに自動的にブランチとドラフトのプルリクエストを作成し、
+# その後、作成されたブランチ名とプルリクエストのチェックアウトコマンドをissueのコメントとして追加します。
+
+name: Auto Create Branch, Draft PR, and Comment when Issue is Assigned
 
 on:
   issues:
     types: [assigned]
 
 jobs:
-  create_branch:
+  create_branch_and_pr:
     runs-on: ubuntu-latest
     steps:
+      # リポジトリのコードをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # issueのタイトルからプレフィックスを抽出
+      - name: Extract prefix from issue title
+        id: extract_prefix
+        run: |
+          PREFIX=$(echo "${{ github.event.issue.title }}" | grep -oE '^\[.*?\]' | tr -d '[]')
+          echo "PREFIX=$PREFIX" >> $GITHUB_ENV
+
+      # 新しいブランチを作成
       - name: Create new branch
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email ${{ secrets.TEST_EMAIL }}
-          git checkout -b issue-${{ github.event.issue.number }}
-          git push origin issue-${{ github.event.issue.number }}
+          BRANCH_NAME="${PREFIX}_issue-${{ github.event.issue.number }}"
+          git checkout -b $BRANCH_NAME
+          git push origin $BRANCH_NAME
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      # ドラフトのプルリクエストを作成
+      - name: Create draft pull request
+        id: create_pr
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const branch_name = process.env.BRANCH_NAME;
+            const pr_title = "Draft PR for " + branch_name;
+            const pr_body = `This is a draft PR for branch \`${branch_name}\` related to the issue #${{ github.event.issue.number }}.`;
+            const pr = github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: pr_title,
+              body: pr_body,
+              head: branch_name,
+              base: 'main',  # この部分は、ベースとなるブランチ名に応じて変更してください。
+              draft: true
+            });
+            return pr.data.number;
+
+      # issueにブランチ名とプルリクエストのチェックアウトコマンドをコメントとして追加
+      - name: Comment on issue with branch name and PR checkout command
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue_number = ${{ github.event.issue.number }};
+            const branch_name = process.env.BRANCH_NAME;
+            const pr_number = ${{ steps.create_pr.outputs.result }};
+            const message = `
+            新しいブランチ \`${branch_name}\` が作成されました。
+            Checkout with GitHub CLI:
+            \`gh pr checkout ${pr_number}\`
+            `;
+            github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: message
+            });
