@@ -65,7 +65,7 @@ jobs:
               base: 'main',
               draft: true
             });
-            return github.event.number;
+            return github.context.issue.number;
 
       # issueにブランチ名とプルリクエストのチェックアウトコマンドをコメントとして追加
       - name: Comment on issue with branch name and PR checkout command
