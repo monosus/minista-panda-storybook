@@ -65,7 +65,6 @@ jobs:
               base: 'main',
               draft: true
             });
-            console.log(pr)
 
       # issueにブランチ名とプルリクエストのチェックアウトコマンドをコメントとして追加
       - name: Comment on issue with branch name and PR checkout command
