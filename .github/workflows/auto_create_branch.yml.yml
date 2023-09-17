@@ -65,7 +65,7 @@ jobs:
               base: 'main',
               draft: true
             });
-            const pr_number = ${{pr}}
+            echo ${pr}
             # return pr_number;
 
       # issueにブランチ名とプルリクエストのチェックアウトコマンドをコメントとして追加
