@@ -65,7 +65,7 @@ jobs:
               base: 'main',
               draft: true
             });
-            const pr_number = ${{github.event.number}}
+            const pr_number = ${{github.event.pull_request.number}}
             return pr_number;
 
       # issueにブランチ名とプルリクエストのチェックアウトコマンドをコメントとして追加
