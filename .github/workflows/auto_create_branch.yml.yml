@@ -56,7 +56,7 @@ jobs:
             const branch_name = process.env.BRANCH_NAME;
             const pr_title = "Draft PR for " + branch_name;
             const pr_body = `This is a draft PR for branch \`${branch_name}\` related to the issue #${{ github.event.issue.number }}.`;
-            const pr = github.pulls.create({
+            const pr = github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: pr_title,
