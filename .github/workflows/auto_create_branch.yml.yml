@@ -27,10 +27,11 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email ${{ secrets.TEST_EMAIL }}
-          BRANCH_NAME="${PREFIX}_issue-${{ github.event.issue.number }}"
-          git checkout -b $BRANCH_NAME
-          git push origin $BRANCH_NAME
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          # PREFIXが空でない場合にアンダースコアを追加
+          BRANCH_NAME_SUFFIX="${PREFIX:+_}${PREFIX}issue-${{ github.event.issue.number }}"
+          git checkout -b $BRANCH_NAME_SUFFIX
+          git push origin $BRANCH_NAME_SUFFIX
+          echo "BRANCH_NAME=$BRANCH_NAME_SUFFIX" >> $GITHUB_ENV
       
       # 空のコミットを追加
       - name: Add empty commit
@@ -71,7 +72,9 @@ jobs:
             const message = `
             新しいブランチ \`${branch_name}\` が作成されました。
             Checkout with GitHub CLI:
-            \```gh pr checkout ${pr_number}\```
+            \`\`\`bash
+            gh pr checkout ${pr_number}
+            \`\`\`
             `;
             github.rest.issues.createComment({
               owner: context.repo.owner,
