@@ -45,6 +45,12 @@ jobs:
           git checkout -b $BRANCH_NAME
           git push origin $BRANCH_NAME
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+      
+      # 空のコミットを追加
+      - name: Add empty commit
+        run: |
+          git commit --allow-empty -m "Empty commit to initiate PR"
+          git push origin $BRANCH_NAME
 
       # ドラフトのプルリクエストを作成
       - name: Create draft pull request
