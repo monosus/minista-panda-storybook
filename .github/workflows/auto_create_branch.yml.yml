@@ -48,7 +48,7 @@ jobs:
               title: pr_title,
               body: pr_body,
               head: branch_name,
-              base: 'main',  // この部分は、ベースとなるブランチ名に応じて変更してください。
+              base: 'main',
               draft: true
             });
             return pr.data.number;
