@@ -46,7 +46,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const branch_name = process.env.BRANCH_NAME;
-            const pr_title = "${{ github.event.issue.title }}";  # この行を変更
+            const pr_title = "${{ github.event.issue.title }}";
             const pr_body = `This is a draft PR for branch \`${branch_name}\` related to the issue #${{ github.event.issue.number }}.`;
             const prResponse = await github.rest.pulls.create({
               owner: context.repo.owner,
