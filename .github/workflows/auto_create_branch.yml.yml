@@ -21,20 +21,6 @@ jobs:
         run: |
           PREFIX=$(echo "${{ github.event.issue.title }}" | grep -oE '^\[.*?\]' | tr -d '[]')
           echo "PREFIX=$PREFIX" >> $GITHUB_ENV
-      # test
-      - name: Simple Comment on Issue
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const issue_number = ${{ github.event.issue.number }};
-            const message = "テストコメント";
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue_number,
-              body: message
-            });
 
       # 新しいブランチを作成
       - name: Create new branch
@@ -49,7 +35,7 @@ jobs:
       # 空のコミットを追加
       - name: Add empty commit
         run: |
-          git commit --allow-empty -m "Empty commit to initiate PR"
+          git commit --allow-empty -m "Empty commit for draft PR"
           git push origin $BRANCH_NAME
 
       # ドラフトのプルリクエストを作成
@@ -60,7 +46,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const branch_name = process.env.BRANCH_NAME;
-            const pr_title = "Draft PR for " + branch_name;
+            const pr_title = "${{ github.event.issue.title }}";  # この行を変更
             const pr_body = `This is a draft PR for branch \`${branch_name}\` related to the issue #${{ github.event.issue.number }}.`;
             const prResponse = await github.rest.pulls.create({
               owner: context.repo.owner,
@@ -85,7 +71,7 @@ jobs:
             const message = `
             新しいブランチ \`${branch_name}\` が作成されました。
             Checkout with GitHub CLI:
-            \`gh pr checkout ${pr_number}\`
+            \```gh pr checkout ${pr_number}\```
             `;
             github.rest.issues.createComment({
               owner: context.repo.owner,
