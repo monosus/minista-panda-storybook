@@ -16,13 +16,14 @@ export default function About() {
         <script type="module" src="/src/assets/entry.ts" />
       </Head>
       <div className={css({ border: '4px dotted orange', width: '5/12' })}>
-        <HtmlAppendedLink href="hoge">abbbb</HtmlAppendedLink>
+        <HtmlAppendedLink href="hoge">abbbb!!!!!!!</HtmlAppendedLink>
       </div>
       <nav hx-boost="true">
         <HtmlAppendedLink href="/">home?</HtmlAppendedLink>
       </nav>
       <StackImage />
       <HtmlAppendedLink href="/">no boost home?</HtmlAppendedLink>
+	  <HtmlAppendedLink href="/">no boost home?</HtmlAppendedLink>
       <script type="module" src="/src/assets/about.ts" />
     </>
   );
